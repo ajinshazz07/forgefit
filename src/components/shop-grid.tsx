@@ -15,7 +15,7 @@ const PRODUCTS = [
     id: "p1",
     name: "Industrial Dumbbells",
     price: 129.99,
-    image: PlaceHolderImages.find(i => i.id === 'dumbbells')?.imageUrl || "",
+    image: PlaceHolderImages.find(i => i.id === 'dumbbells')?.imageUrl || null,
     category: "Hardware",
     rating: 4.9
   },
@@ -23,7 +23,7 @@ const PRODUCTS = [
     id: "p2",
     name: "Resilience Bands",
     price: 49.99,
-    image: PlaceHolderImages.find(i => i.id === 'resistance-bands')?.imageUrl || "",
+    image: PlaceHolderImages.find(i => i.id === 'resistance-bands')?.imageUrl || null,
     category: "Hardware",
     rating: 4.7
   },
@@ -31,7 +31,7 @@ const PRODUCTS = [
     id: "p3",
     name: "Forge Whey Protein",
     price: 64.99,
-    image: PlaceHolderImages.find(i => i.id === 'protein-powder')?.imageUrl || "",
+    image: PlaceHolderImages.find(i => i.id === 'protein-powder')?.imageUrl || null,
     category: "Supplements",
     rating: 5.0
   },
@@ -39,7 +39,7 @@ const PRODUCTS = [
     id: "p4",
     name: "Castle Grip Mat",
     price: 39.99,
-    image: PlaceHolderImages.find(i => i.id === 'yoga-mat')?.imageUrl || "",
+    image: PlaceHolderImages.find(i => i.id === 'yoga-mat')?.imageUrl || null,
     category: "Gear",
     rating: 4.8
   }
@@ -84,12 +84,19 @@ export function ShopGrid() {
         {PRODUCTS.map((product) => (
           <Card key={product.id} className="bg-card border-border overflow-hidden group hover:border-primary/50 transition-all candy-red-glow">
             <div className="relative aspect-square overflow-hidden bg-secondary">
-              <Image
-                src={product.image}
-                alt={product.name}
-                fill
-                className="object-cover group-hover:scale-110 transition-transform duration-500"
-              />
+              {product.image ? (
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  data-ai-hint="gym equipment"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center bg-muted">
+                  <Package className="w-12 h-12 text-muted-foreground" />
+                </div>
+              )}
               <div className="absolute top-2 right-2 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                 <Button size="icon" variant="secondary" className="rounded-full w-10 h-10 shadow-lg">
                   <Star className="w-4 h-4 text-primary fill-primary" />
