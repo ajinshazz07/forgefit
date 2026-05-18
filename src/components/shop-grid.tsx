@@ -14,7 +14,7 @@ const PRODUCTS = [
     id: "p1",
     name: "Industrial Dumbbells",
     price: 129.99,
-    image: PlaceHolderImages.find(i => i.id === 'dumbbells')?.imageUrl || "https://picsum.photos/seed/dumbbells/600/600",
+    image: PlaceHolderImages.find(i => i.id === 'dumbbells')?.imageUrl || "https://picsum.photos/seed/123/600/600",
     category: "Hardware",
     rating: 4.9
   },
@@ -22,7 +22,7 @@ const PRODUCTS = [
     id: "p2",
     name: "Resilience Bands",
     price: 49.99,
-    image: PlaceHolderImages.find(i => i.id === 'resistance-bands')?.imageUrl || "https://picsum.photos/seed/bands/600/600",
+    image: PlaceHolderImages.find(i => i.id === 'resistance-bands')?.imageUrl || "https://picsum.photos/seed/456/600/600",
     category: "Hardware",
     rating: 4.7
   },
@@ -30,7 +30,7 @@ const PRODUCTS = [
     id: "p3",
     name: "Forge Whey Protein",
     price: 64.99,
-    image: PlaceHolderImages.find(i => i.id === 'protein-powder')?.imageUrl || "https://picsum.photos/seed/protein/600/600",
+    image: PlaceHolderImages.find(i => i.id === 'protein-powder')?.imageUrl || "https://picsum.photos/seed/789/600/600",
     category: "Supplements",
     rating: 5.0
   },
@@ -38,7 +38,7 @@ const PRODUCTS = [
     id: "p4",
     name: "Castle Grip Mat",
     price: 39.99,
-    image: PlaceHolderImages.find(i => i.id === 'yoga-mat')?.imageUrl || "https://picsum.photos/seed/mat/600/600",
+    image: PlaceHolderImages.find(i => i.id === 'yoga-mat')?.imageUrl || "https://picsum.photos/seed/101/600/600",
     category: "Gear",
     rating: 4.8
   }
@@ -50,7 +50,7 @@ export function ShopGrid() {
   const addToCart = (id: string, name: string) => {
     setCart(prev => ({ ...prev, [id]: (prev[id] || 0) + 1 }))
     toast({
-      title: "Added to Cart",
+      title: "Item Secured",
       description: `${name} has been added to your vault.`
     })
   }

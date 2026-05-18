@@ -44,16 +44,16 @@ export function BMIForm() {
       
       if (score < 18.5) {
         classification = "Underweight"
-        goal = "Hypertrophic Focus (Gain)"
+        goal = "Hypertrophic Surplus"
       } else if (score >= 18.5 && score < 24.9) {
         classification = "Optimal Weight"
         goal = "Performance & Definition"
       } else if (score >= 25 && score < 29.9) {
         classification = "Overweight"
-        goal = "Metabolic Optimization"
+        goal = "Metabolic Recomposition"
       } else {
         classification = "Obese"
-        goal = "Aggressive Fat Loss"
+        goal = "Aggressive Caloric Deficit"
       }
 
       setBmiResult({ score, classification, goal })
@@ -69,8 +69,8 @@ export function BMIForm() {
       
       setPlan(generatedPlan)
       toast({
-        title: "Strategy Calculated",
-        description: "Your industrial-grade fitness plan has been generated."
+        title: "Matrix Analysis Complete",
+        description: "Your industrial-grade strategy is ready."
       })
       
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -78,8 +78,8 @@ export function BMIForm() {
       console.error("Failed to generate plan:", error)
       toast({
         variant: "destructive",
-        title: "AI Matrix Failure",
-        description: error.message || "Failed to reach GenAI model. Please verify API configuration."
+        title: "AI Link Disrupted",
+        description: error.message || "Unable to reach GenAI model. Verify industrial credentials."
       })
     } finally {
       setLoading(false)
@@ -91,7 +91,7 @@ export function BMIForm() {
       {!plan ? (
         <Card className="max-w-xl mx-auto border-primary/20 bg-card candy-red-glow">
           <CardHeader>
-            <CardTitle className="text-3xl font-headline flex items-center gap-3 italic">
+            <CardTitle className="text-3xl font-headline flex items-center gap-3 italic uppercase tracking-tighter">
               <Calculator className="text-primary w-8 h-8" />
               BMI <span className="text-primary">Matrix</span>
             </CardTitle>
@@ -137,7 +137,7 @@ export function BMIForm() {
                 {loading ? (
                   <>
                     <Loader2 className="mr-2 h-6 w-6 animate-spin" />
-                    Initializing Model...
+                    Calculating...
                   </>
                 ) : (
                   <>
@@ -153,7 +153,7 @@ export function BMIForm() {
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
           <div className="max-w-4xl mx-auto flex flex-col md:flex-row gap-6 items-center justify-between p-8 bg-card rounded-xl border border-primary/20 backdrop-blur-sm candy-red-glow">
             <div className="text-center md:text-left flex flex-col items-center md:items-start">
-              <h2 className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.3em] mb-2 italic">Athlete Classification</h2>
+              <h2 className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.3em] mb-2 italic">Classification</h2>
               <div className="flex items-baseline gap-3">
                 <span className="text-6xl font-headline font-black text-primary italic drop-shadow-[0_0_10px_rgba(242,13,13,0.4)]">{bmiResult?.score}</span>
                 <span className="text-2xl font-headline font-bold text-white uppercase italic tracking-tighter">{bmiResult?.classification}</span>

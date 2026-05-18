@@ -45,3 +45,8 @@ To start Genkit for AI features:
 ```bash
 npm run genkit:dev
 ```
+
+## Authorized Domains (Firebase)
+Remember to whitelist your development URL in the Firebase Console:
+1. Go to **Authentication** > **Settings** > **Authorized Domains**.
+2. Add your workstation domain (e.g., `*-9002.*.cloudworkstations.dev`).
