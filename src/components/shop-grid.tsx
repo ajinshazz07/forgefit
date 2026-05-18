@@ -84,7 +84,7 @@ export function ShopGrid() {
         {PRODUCTS.map((product) => (
           <Card key={product.id} className="bg-card border-border overflow-hidden group hover:border-primary/50 transition-all candy-red-glow">
             <div className="relative aspect-square overflow-hidden bg-secondary">
-              {product.image ? (
+              {product.image && product.image !== "" ? (
                 <Image
                   src={product.image}
                   alt={product.name}

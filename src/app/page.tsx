@@ -17,7 +17,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative h-[85vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
-          {heroImage && (
+          {heroImage && heroImage.imageUrl && (
             <Image
               src={heroImage.imageUrl}
               alt={heroImage.description}
