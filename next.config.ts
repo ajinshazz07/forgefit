@@ -2,10 +2,6 @@ import type {NextConfig} from 'next';
 
 const nextConfig: NextConfig = {
   /* config options here */
-  output: 'export',
-  basePath: '/forgefit',
-  assetPrefix: '/forgefit/',
-  trailingSlash: true,
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -13,7 +9,6 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   images: {
-    unoptimized: true, // Required for static export
     remotePatterns: [
       {
         protocol: 'https',
