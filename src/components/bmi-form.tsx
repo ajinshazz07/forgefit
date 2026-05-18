@@ -1,4 +1,3 @@
-
 "use client"
 
 import { useState } from "react"
@@ -45,16 +44,16 @@ export function BMIForm() {
       
       if (score < 18.5) {
         classification = "Underweight"
-        goal = "Weight Gain"
-      } else if (score >= 18.5 && score < 25) {
-        classification = "Normal Weight"
-        goal = "Maintenance & Toning"
-      } else if (score >= 25 && score < 30) {
+        goal = "Hypertrophic Focus (Gain)"
+      } else if (score >= 18.5 && score < 24.9) {
+        classification = "Optimal Weight"
+        goal = "Performance & Definition"
+      } else if (score >= 25 && score < 29.9) {
         classification = "Overweight"
-        goal = "Weight Loss"
+        goal = "Metabolic Optimization"
       } else {
         classification = "Obese"
-        goal = "Weight Loss"
+        goal = "Aggressive Fat Loss"
       }
 
       setBmiResult({ score, classification, goal })
@@ -74,14 +73,13 @@ export function BMIForm() {
         description: "Your industrial-grade fitness plan has been generated."
       })
       
-      // Scroll to top of results
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    } catch (error) {
+    } catch (error: any) {
       console.error("Failed to generate plan:", error)
       toast({
         variant: "destructive",
-        title: "Calculation Error",
-        description: "Failed to reach GenAI model. Please try again."
+        title: "AI Matrix Failure",
+        description: error.message || "Failed to reach GenAI model. Please verify API configuration."
       })
     } finally {
       setLoading(false)
@@ -93,58 +91,58 @@ export function BMIForm() {
       {!plan ? (
         <Card className="max-w-xl mx-auto border-primary/20 bg-card candy-red-glow">
           <CardHeader>
-            <CardTitle className="text-3xl font-headline flex items-center gap-3">
+            <CardTitle className="text-3xl font-headline flex items-center gap-3 italic">
               <Calculator className="text-primary w-8 h-8" />
-              BMI Matrix
+              BMI <span className="text-primary">Matrix</span>
             </CardTitle>
           </CardHeader>
           <form onSubmit={handleSubmit(onSubmit)}>
             <CardContent className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="height">Height (cm)</Label>
-                  <Input id="height" type="number" placeholder="175" {...register("height")} className="bg-secondary/50 border-border" />
-                  {errors.height && <p className="text-xs text-destructive flex items-center gap-1 mt-1"><AlertCircle className="w-3 h-3" /> {errors.height.message}</p>}
+                  <Label htmlFor="height" className="text-xs uppercase font-black tracking-widest text-muted-foreground">Height (cm)</Label>
+                  <Input id="height" type="number" placeholder="175" {...register("height")} className="bg-secondary/50 border-border h-12 font-bold" />
+                  {errors.height && <p className="text-xs text-destructive flex items-center gap-1 mt-1 font-bold"><AlertCircle className="w-3 h-3" /> {errors.height.message}</p>}
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="weight">Weight (kg)</Label>
-                  <Input id="weight" type="number" placeholder="70" {...register("weight")} className="bg-secondary/50 border-border" />
-                  {errors.weight && <p className="text-xs text-destructive flex items-center gap-1 mt-1"><AlertCircle className="w-3 h-3" /> {errors.weight.message}</p>}
+                  <Label htmlFor="weight" className="text-xs uppercase font-black tracking-widest text-muted-foreground">Weight (kg)</Label>
+                  <Input id="weight" type="number" placeholder="70" {...register("weight")} className="bg-secondary/50 border-border h-12 font-bold" />
+                  {errors.weight && <p className="text-xs text-destructive flex items-center gap-1 mt-1 font-bold"><AlertCircle className="w-3 h-3" /> {errors.weight.message}</p>}
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label htmlFor="age">Age</Label>
-                  <Input id="age" type="number" placeholder="25" {...register("age")} className="bg-secondary/50 border-border" />
-                  {errors.age && <p className="text-xs text-destructive flex items-center gap-1 mt-1"><AlertCircle className="w-3 h-3" /> {errors.age.message}</p>}
+                  <Label htmlFor="age" className="text-xs uppercase font-black tracking-widest text-muted-foreground">Age</Label>
+                  <Input id="age" type="number" placeholder="25" {...register("age")} className="bg-secondary/50 border-border h-12 font-bold" />
+                  {errors.age && <p className="text-xs text-destructive flex items-center gap-1 mt-1 font-bold"><AlertCircle className="w-3 h-3" /> {errors.age.message}</p>}
                 </div>
                 <div className="space-y-2">
-                  <Label>Gender</Label>
+                  <Label className="text-xs uppercase font-black tracking-widest text-muted-foreground">Gender</Label>
                   <Select onValueChange={(val) => setValue("gender", val as any)} defaultValue="male">
-                    <SelectTrigger className="bg-secondary/50 border-border">
+                    <SelectTrigger className="bg-secondary/50 border-border h-12 font-bold">
                       <SelectValue placeholder="Select gender" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="male">Male</SelectItem>
-                      <SelectItem value="female">Female</SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
+                      <SelectItem value="male" className="font-bold">Male</SelectItem>
+                      <SelectItem value="female" className="font-bold">Female</SelectItem>
+                      <SelectItem value="other" className="font-bold">Other</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
               </div>
             </CardContent>
             <CardFooter>
-              <Button type="submit" disabled={loading} className="w-full h-12 font-bold text-lg candy-red-glow">
+              <Button type="submit" disabled={loading} className="w-full h-14 font-black text-xl candy-red-glow uppercase italic tracking-tighter">
                 {loading ? (
                   <>
-                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                    Calibrating AI Strategy...
+                    <Loader2 className="mr-2 h-6 w-6 animate-spin" />
+                    Initializing Model...
                   </>
                 ) : (
                   <>
-                    Generate Bespoke Plan
-                    <Target className="ml-2 h-5 w-5" />
+                    Forge AI Strategy
+                    <Target className="ml-2 h-6 w-6" />
                   </>
                 )}
               </Button>
@@ -153,26 +151,26 @@ export function BMIForm() {
         </Card>
       ) : (
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-          <div className="max-w-4xl mx-auto flex flex-col md:flex-row gap-6 items-center justify-between p-8 bg-secondary/30 rounded-xl border border-primary/20 backdrop-blur-sm">
+          <div className="max-w-4xl mx-auto flex flex-col md:flex-row gap-6 items-center justify-between p-8 bg-card rounded-xl border border-primary/20 backdrop-blur-sm candy-red-glow">
             <div className="text-center md:text-left flex flex-col items-center md:items-start">
-              <h2 className="text-xs font-black text-muted-foreground uppercase tracking-[0.2em] mb-2 italic">Athlete Classification</h2>
+              <h2 className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.3em] mb-2 italic">Athlete Classification</h2>
               <div className="flex items-baseline gap-3">
-                <span className="text-5xl font-headline font-black text-primary italic drop-shadow-[0_0_10px_rgba(242,13,13,0.3)]">{bmiResult?.score}</span>
-                <span className="text-xl font-headline font-bold text-white uppercase italic">{bmiResult?.classification}</span>
+                <span className="text-6xl font-headline font-black text-primary italic drop-shadow-[0_0_10px_rgba(242,13,13,0.4)]">{bmiResult?.score}</span>
+                <span className="text-2xl font-headline font-bold text-white uppercase italic tracking-tighter">{bmiResult?.classification}</span>
               </div>
             </div>
-            <div className="h-px w-full md:h-16 md:w-px bg-border hidden md:block" />
+            <div className="h-px w-full md:h-16 md:w-px bg-border/50 hidden md:block" />
             <div className="text-center md:text-left flex flex-col items-center md:items-start">
-              <h2 className="text-xs font-black text-muted-foreground uppercase tracking-[0.2em] mb-2 italic">Target Objective</h2>
+              <h2 className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.3em] mb-2 italic">Target Objective</h2>
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-accent/20 rounded-lg">
                   <CheckCircle2 className="text-accent w-6 h-6" />
                 </div>
-                <span className="text-3xl font-headline font-black text-accent uppercase italic">{bmiResult?.goal}</span>
+                <span className="text-3xl font-headline font-black text-accent uppercase italic tracking-tighter">{bmiResult?.goal}</span>
               </div>
             </div>
-            <Button variant="outline" size="lg" onClick={() => { setPlan(null); setBmiResult(null); }} className="border-muted-foreground/30 hover:border-primary transition-colors h-12 font-bold">
-              Recalculate Metrics
+            <Button variant="outline" size="lg" onClick={() => { setPlan(null); setBmiResult(null); }} className="border-primary/30 hover:bg-primary/10 transition-all h-14 font-black uppercase italic tracking-widest text-xs px-8">
+              Recalibrate
             </Button>
           </div>
 
