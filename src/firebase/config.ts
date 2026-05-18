@@ -1,6 +1,6 @@
 
 export const firebaseConfig = {
-  apiKey: "AIzaSyD8gjJdAsRhXbB9yARVQnsdN3hAlD02T6A",
+  apiKey: "AIzaSyBdX38cZd10BsSM2dFv1_feM8TG9yXS5yg",
   authDomain: "altibix-b3874.firebaseapp.com",
   projectId: "altibix-b3874",
   storageBucket: "altibix-b3874.firebasestorage.app",

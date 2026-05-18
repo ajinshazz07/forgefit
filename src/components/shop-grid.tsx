@@ -3,7 +3,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import { ShoppingCart, Plus, Package, Shield, Star, AlertCircle } from "lucide-react"
+import { ShoppingCart, Plus, Package, Shield, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -15,7 +15,7 @@ const PRODUCTS = [
     id: "p1",
     name: "Industrial Dumbbells",
     price: 129.99,
-    image: PlaceHolderImages.find(i => i.id === 'dumbbells')?.imageUrl || "https://images.unsplash.com/photo-1638536532686-d610adfc8e5c?auto=format&fit=crop&q=80&w=600",
+    image: PlaceHolderImages.find(i => i.id === 'dumbbells')?.imageUrl || "https://picsum.photos/seed/dumbbells/600/600",
     category: "Hardware",
     rating: 4.9
   },
@@ -23,7 +23,7 @@ const PRODUCTS = [
     id: "p2",
     name: "Resilience Bands",
     price: 49.99,
-    image: PlaceHolderImages.find(i => i.id === 'resistance-bands')?.imageUrl || "https://images.unsplash.com/photo-1598289431512-b97b0917a63e?auto=format&fit=crop&q=80&w=600",
+    image: PlaceHolderImages.find(i => i.id === 'resistance-bands')?.imageUrl || "https://picsum.photos/seed/bands/600/600",
     category: "Hardware",
     rating: 4.7
   },
@@ -31,7 +31,7 @@ const PRODUCTS = [
     id: "p3",
     name: "Forge Whey Protein",
     price: 64.99,
-    image: PlaceHolderImages.find(i => i.id === 'protein-powder')?.imageUrl || "https://images.unsplash.com/photo-1593095186572-4e6823c6f10d?auto=format&fit=crop&q=80&w=600",
+    image: PlaceHolderImages.find(i => i.id === 'protein-powder')?.imageUrl || "https://picsum.photos/seed/protein/600/600",
     category: "Supplements",
     rating: 5.0
   },
@@ -39,7 +39,7 @@ const PRODUCTS = [
     id: "p4",
     name: "Castle Grip Mat",
     price: 39.99,
-    image: PlaceHolderImages.find(i => i.id === 'yoga-mat')?.imageUrl || "https://images.unsplash.com/photo-1592432678016-e910b452f9a2?auto=format&fit=crop&q=80&w=600",
+    image: PlaceHolderImages.find(i => i.id === 'yoga-mat')?.imageUrl || "https://picsum.photos/seed/mat/600/600",
     category: "Gear",
     rating: 4.8
   }

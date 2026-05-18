@@ -73,6 +73,9 @@ export function BMIForm() {
         title: "Strategy Calculated",
         description: "Your industrial-grade fitness plan has been generated."
       })
+      
+      // Scroll to top of results
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (error) {
       console.error("Failed to generate plan:", error)
       toast({
