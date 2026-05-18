@@ -1,0 +1,41 @@
+
+{
+  "placeholderImages": [
+    {
+      "id": "hero-gym",
+      "description": "Premium dark gym atmosphere",
+      "imageUrl": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1200&h=800&auto=format&fit=crop",
+      "imageHint": "gym fitness"
+    },
+    {
+      "id": "dumbbells",
+      "description": "Adjustable dumbbells set",
+      "imageUrl": "https://images.unsplash.com/photo-1638536532686-d610adfc8e5c?q=80&w=600&h=600&auto=format&fit=crop",
+      "imageHint": "dumbbells weights"
+    },
+    {
+      "id": "resistance-bands",
+      "description": "Premium resistance bands",
+      "imageUrl": "https://images.unsplash.com/photo-1598289431512-b97b0917a63e?q=80&w=600&h=600&auto=format&fit=crop",
+      "imageHint": "resistance bands"
+    },
+    {
+      "id": "protein-powder",
+      "description": "High-quality whey protein",
+      "imageUrl": "https://images.unsplash.com/photo-1593095186572-4e6823c6f10d?q=80&w=600&h=600&auto=format&fit=crop",
+      "imageHint": "protein powder"
+    },
+    {
+      "id": "yoga-mat",
+      "description": "Non-slip gym mat",
+      "imageUrl": "https://images.unsplash.com/photo-1592432678016-e910b452f9a2?q=80&w=600&h=600&auto=format&fit=crop",
+      "imageHint": "yoga mat"
+    },
+    {
+      "id": "workout-tracking",
+      "description": "Athlete tracking workout on watch",
+      "imageUrl": "https://images.unsplash.com/photo-1510017803434-a899398421b3?q=80&w=800&h=500&auto=format&fit=crop",
+      "imageHint": "workout tracking"
+    }
+  ]
+}
