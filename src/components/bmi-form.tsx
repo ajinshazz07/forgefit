@@ -5,20 +5,20 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
-import { Calculator, Loader2, Target, CheckCircle2 } from "lucide-react"
+import { Calculator, Loader2, Target, CheckCircle2, AlertCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { generatePersonalizedFitnessPlan, type PersonalizedFitnessPlanOutput } from "@/ai/flows/personalized-fitness-plan-generation"
 import { FitnessPlanDisplay } from "./fitness-plan-display"
+import { toast } from "@/hooks/use-toast"
 
 const formSchema = z.object({
-  height: z.coerce.number().min(50).max(300),
-  weight: z.coerce.number().min(20).max(500),
-  age: z.coerce.number().min(10).max(120),
+  height: z.coerce.number().min(50, "Height must be at least 50cm").max(300, "Height must be under 300cm"),
+  weight: z.coerce.number().min(20, "Weight must be at least 20kg").max(500, "Weight must be under 500kg"),
+  age: z.coerce.number().min(10, "Minimum age is 10").max(120, "Maximum age is 120"),
   gender: z.enum(["male", "female", "other"]),
 })
 
@@ -46,10 +46,10 @@ export function BMIForm() {
       if (score < 18.5) {
         classification = "Underweight"
         goal = "Weight Gain"
-      } else if (score >= 18.5 && score < 24.9) {
+      } else if (score >= 18.5 && score < 25) {
         classification = "Normal Weight"
         goal = "Maintenance & Toning"
-      } else if (score >= 25 && score < 29.9) {
+      } else if (score >= 25 && score < 30) {
         classification = "Overweight"
         goal = "Weight Loss"
       } else {
@@ -69,8 +69,17 @@ export function BMIForm() {
       })
       
       setPlan(generatedPlan)
+      toast({
+        title: "Strategy Calculated",
+        description: "Your industrial-grade fitness plan has been generated."
+      })
     } catch (error) {
       console.error("Failed to generate plan:", error)
+      toast({
+        variant: "destructive",
+        title: "Calculation Error",
+        description: "Failed to reach GenAI model. Please try again."
+      })
     } finally {
       setLoading(false)
     }
@@ -92,12 +101,12 @@ export function BMIForm() {
                 <div className="space-y-2">
                   <Label htmlFor="height">Height (cm)</Label>
                   <Input id="height" type="number" placeholder="175" {...register("height")} className="bg-secondary/50 border-border" />
-                  {errors.height && <p className="text-xs text-destructive">{errors.height.message}</p>}
+                  {errors.height && <p className="text-xs text-destructive flex items-center gap-1 mt-1"><AlertCircle className="w-3 h-3" /> {errors.height.message}</p>}
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="weight">Weight (kg)</Label>
                   <Input id="weight" type="number" placeholder="70" {...register("weight")} className="bg-secondary/50 border-border" />
-                  {errors.weight && <p className="text-xs text-destructive">{errors.weight.message}</p>}
+                  {errors.weight && <p className="text-xs text-destructive flex items-center gap-1 mt-1"><AlertCircle className="w-3 h-3" /> {errors.weight.message}</p>}
                 </div>
               </div>
 
@@ -105,7 +114,7 @@ export function BMIForm() {
                 <div className="space-y-2">
                   <Label htmlFor="age">Age</Label>
                   <Input id="age" type="number" placeholder="25" {...register("age")} className="bg-secondary/50 border-border" />
-                  {errors.age && <p className="text-xs text-destructive">{errors.age.message}</p>}
+                  {errors.age && <p className="text-xs text-destructive flex items-center gap-1 mt-1"><AlertCircle className="w-3 h-3" /> {errors.age.message}</p>}
                 </div>
                 <div className="space-y-2">
                   <Label>Gender</Label>
@@ -141,24 +150,26 @@ export function BMIForm() {
         </Card>
       ) : (
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-          <div className="max-w-4xl mx-auto flex flex-col md:flex-row gap-4 items-center justify-between p-6 bg-secondary/30 rounded-xl border border-primary/20">
-            <div className="text-center md:text-left">
-              <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-1">Your Result</h2>
-              <div className="flex items-baseline gap-2">
-                <span className="text-4xl font-headline font-black text-primary">{bmiResult?.score}</span>
-                <span className="text-lg font-medium text-white">{bmiResult?.classification}</span>
+          <div className="max-w-4xl mx-auto flex flex-col md:flex-row gap-6 items-center justify-between p-8 bg-secondary/30 rounded-xl border border-primary/20 backdrop-blur-sm">
+            <div className="text-center md:text-left flex flex-col items-center md:items-start">
+              <h2 className="text-xs font-black text-muted-foreground uppercase tracking-[0.2em] mb-2 italic">Athlete Classification</h2>
+              <div className="flex items-baseline gap-3">
+                <span className="text-5xl font-headline font-black text-primary italic drop-shadow-[0_0_10px_rgba(242,13,13,0.3)]">{bmiResult?.score}</span>
+                <span className="text-xl font-headline font-bold text-white uppercase italic">{bmiResult?.classification}</span>
               </div>
             </div>
-            <div className="h-px w-full md:h-12 md:w-px bg-border hidden md:block" />
-            <div className="text-center md:text-left">
-              <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-widest mb-1">Recommended Goal</h2>
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="text-accent w-6 h-6" />
-                <span className="text-2xl font-headline font-bold text-accent">{bmiResult?.goal}</span>
+            <div className="h-px w-full md:h-16 md:w-px bg-border hidden md:block" />
+            <div className="text-center md:text-left flex flex-col items-center md:items-start">
+              <h2 className="text-xs font-black text-muted-foreground uppercase tracking-[0.2em] mb-2 italic">Target Objective</h2>
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-accent/20 rounded-lg">
+                  <CheckCircle2 className="text-accent w-6 h-6" />
+                </div>
+                <span className="text-3xl font-headline font-black text-accent uppercase italic">{bmiResult?.goal}</span>
               </div>
             </div>
-            <Button variant="outline" onClick={() => { setPlan(null); setBmiResult(null); }} className="border-muted-foreground/30">
-              Recalculate
+            <Button variant="outline" size="lg" onClick={() => { setPlan(null); setBmiResult(null); }} className="border-muted-foreground/30 hover:border-primary transition-colors h-12 font-bold">
+              Recalculate Metrics
             </Button>
           </div>
 
