@@ -131,17 +131,6 @@ export function ShopGrid() {
           </Card>
         ))}
       </div>
-      
-      <div className="bg-primary/5 border border-primary/10 rounded-2xl p-12 text-center">
-        <h3 className="text-3xl font-headline font-black uppercase italic mb-4">Custom Configuration Required?</h3>
-        <p className="text-muted-foreground max-w-lg mx-auto mb-8">
-          Our specialists can assemble custom racks and industrial-grade gym builds tailored to your 
-          space and legacy requirements.
-        </p>
-        <Button size="lg" className="h-14 px-12 text-lg font-black uppercase italic tracking-tighter">
-          Consult the Architects
-        </Button>
-      </div>
     </div>
   )
 }
