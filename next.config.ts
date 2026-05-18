@@ -3,9 +3,9 @@ import type {NextConfig} from 'next';
 const nextConfig: NextConfig = {
   /* config options here */
   output: 'export',
-  // Required if the repo is not deployed to the root domain. 
-  // e.g. https://ajinshazz07.github.io/forgefit/
   basePath: '/forgefit',
+  assetPrefix: '/forgefit/',
+  trailingSlash: true,
   typescript: {
     ignoreBuildErrors: true,
   },
